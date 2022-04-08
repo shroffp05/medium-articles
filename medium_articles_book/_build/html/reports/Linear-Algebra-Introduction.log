@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/priyankshroff/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Lets try a matrix and a vector that dont have the right combination of rows and columns. 
+
+A = np.array([[1,2,3],[4,5,6],[7,8,9]])
+x = np.array([1,2])
+
+try:
+    np.matmul(A,x)
+except ValueError: 
+    dims_right = False 
+
+assert dims_right, "The dimensions dont match"
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAssertionError[0m                            Traceback (most recent call last)
+[0;32m/var/folders/8c/t0yxdp4914j0qz_qmm5xpyg80000gn/T/ipykernel_9487/728562885.py[0m in [0;36m<cell line: 11>[0;34m()[0m
+[1;32m      9[0m     [0mdims_right[0m [0;34m=[0m [0;32mFalse[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m [0;34m[0m[0m
+[0;32m---> 11[0;31m [0;32massert[0m [0mdims_right[0m[0;34m,[0m [0;34m"The dimensions dont match"[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mAssertionError[0m: The dimensions dont match
+AssertionError: The dimensions dont match
+

@@ -1,0 +1,941 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Algebra with Numpy: Part 1 &#8212; Medium Articles</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Linear Algebra Part 2" href="Linear-Algebra-Part-II.html" />
+    <link rel="prev" title="About this book" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/MediumLogo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Medium Articles</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About this book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Algebra
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linear Algebra with Numpy: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear-Algebra-Part-II.html">
+   Linear Algebra Part 2
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/articles/Linear-Algebra/Linear-Algebra-Introduction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Farticles/Linear-Algebra/Linear-Algebra-Introduction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/articles/Linear-Algebra/Linear-Algebra-Introduction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-vectors-and-matrices-in-numpy">
+   Part 1: Vectors and Matrices in numpy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-vector-addition-multiplication-unit-vectors-and-dot-cross-products">
+   Part 2: Vector addition, multiplication, unit vectors and dot &amp; cross products
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-two-vectors">
+     Adding two vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-a-vector">
+     Scaling a vector
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-vectors">
+     Unit Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dot-product-between-two-vectors">
+     Dot Product between two vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cross-product-between-two-vectors">
+     Cross Product between two vectors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-matrix-vector-and-matrix-matrix-multiplication">
+   Part 3: Matrix-vector and Matrix-Matrix multiplication
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots-of-the-figures-above">
+   Plots of the figures above
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Algebra with Numpy: Part 1</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-vectors-and-matrices-in-numpy">
+   Part 1: Vectors and Matrices in numpy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-vector-addition-multiplication-unit-vectors-and-dot-cross-products">
+   Part 2: Vector addition, multiplication, unit vectors and dot &amp; cross products
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-two-vectors">
+     Adding two vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-a-vector">
+     Scaling a vector
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-vectors">
+     Unit Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dot-product-between-two-vectors">
+     Dot Product between two vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cross-product-between-two-vectors">
+     Cross Product between two vectors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-matrix-vector-and-matrix-matrix-multiplication">
+   Part 3: Matrix-vector and Matrix-Matrix multiplication
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots-of-the-figures-above">
+   Plots of the figures above
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-with-numpy-part-1">
+<h1>Linear Algebra with Numpy: Part 1<a class="headerlink" href="#linear-algebra-with-numpy-part-1" title="Permalink to this headline">¶</a></h1>
+<p>Linear algebra is the branch of mathematics concerning linear equations such as:</p>
+<div class="math notranslate nohighlight">
+\[a_{1}x_{1}+\cdots +a_{n}x_{n}=b\]</div>
+<div class="math notranslate nohighlight">
+\[a_{1}x_{1}+\cdots +a_{n}x_{n}=b\]</div>
+<p>linear maps such as:</p>
+<div class="math notranslate nohighlight">
+\[(x_{1},\ldots ,x_{n})\mapsto a_{1}x_{1}+\cdots +a_{n}x_{n} $$ $$(x_{1},\ldots ,x_{n})\mapsto a_{1}x_{1}+\cdots +a_{n}x_{n}\]</div>
+<p>and their representations in vector spaces and through matrices.</p>
+<p>Linear algebra is central to almost all areas of mathematics. For instance, linear algebra is fundamental in modern presentations of geometry, including for defining basic objects such as lines, planes and rotations. Also, functional analysis, a branch of mathematical analysis, may be viewed as the application of linear algebra to spaces of functions.<sup>1</sup></p>
+<p>Linear algebra is also a key ingridient in understanding machine learning algorithms. The most common and well known example is linear regression. If you have used a machine learning tool or library, the most common way of solving linear regression is via a least squares optimization that is solved using matrix factorization methods from linear regression, such as an LU decomposition or a singular-value decomposition, or SVD.</p>
+<p>Even the common way of summarizing the linear regression equation uses linear algebra notation:</p>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">.</span> <span class="pre">b</span></code>
+Where y is the output variable A is the dataset and b are the model coefficients.<sup>2</sup></p>
+<p>In this three part series I will outline the use of numpy and scipy to solve some basic linear algebra problems in python. In the first part, we will start with vectors &amp; matrices and how they are represented using numpy, some basic addition, scalar multiplication, dot and cross products using numpy, and finally end with matrix-vector &amp; matrix-matrix multiplications.</p>
+<div class="section" id="part-1-vectors-and-matrices-in-numpy">
+<h2>Part 1: Vectors and Matrices in numpy<a class="headerlink" href="#part-1-vectors-and-matrices-in-numpy" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing the numpy library</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first question you might have is what is a vector? A vector is simply a list of numbers. You can interpret those in one of two ways: One way is to think of a vector as identifying a point in space. Another way to think about it is as a magnitude and direction. Vectors can be of any length and represent a multitude of things.<sup>3</sup></p>
+<p>In numpy, we represent vectors as arrays.</p>
+<p>For example if we want to represent a vector, lets call it <span class="math notranslate nohighlight">\(\hat{x}\)</span> which equals [2,6]. In graphical representation it might look like this:</p>
+<p><img alt="image.png" src="articles/Linear-Algebra/attachment:image.png" /></p>
+<p><b> Figure 1</b></p>
+<p>In numpy, we use arrays to store vectors and matrices. Vectors are called 1D arrays, Matrices are 2D arrays and you can store on another axis and create a 3D array.</p>
+<p><img alt="image.png" src="articles/Linear-Algebra/attachment:image.png" /></p>
+<p>There are 6 general mechanisms for creating arrays:<sup>4</sup></p>
+<ol class="simple">
+<li><p>Conversion from other Python structures (i.e. lists and tuples)</p></li>
+<li><p>Intrinsic NumPy array creation functions (e.g. arange, ones, zeros, etc.)</p></li>
+<li><p>Replicating, joining, or mutating existing arrays</p></li>
+<li><p>Reading arrays from disk, either from standard or custom formats</p></li>
+<li><p>Creating arrays from raw bytes through the use of strings or buffers</p></li>
+<li><p>Use of special library functions (e.g., random)</p></li>
+</ol>
+<p>For our example of <span class="math notranslate nohighlight">\(\hat{x}\)</span>, we will create a list first and then convert it to a 1D array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">numpy_x_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type of x_hat is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type of numpy_x_hat is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numpy_x_hat</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Type of x_hat is: &lt;class &#39;list&#39;&gt;
+Type of numpy_x_hat is: &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s say we want to create a 2x2 matrix. Let’s call it <span class="math notranslate nohighlight">\(A_{2,2} = \begin{pmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{pmatrix}\)</span></p>
+<p>In numpy, we can use lists again to create a matrix. But this time instead of just one list, we create a list for every row in the matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">numpy_A_22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy_A_22</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 2]
+ [2 2]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy_A_22</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy_x_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">.shape</span></code> function to find the dimensions of your array.</p>
+<p>Some other important numpy functions that you can use to initialize arrays are:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.empty</span></code>: Return a new array of given shape and type, without initializing entries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.ones</span></code>: Return a new array of given shape and type, filled with ones.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>: Return a new array of given shape and type, filled with zeros.</p></li>
+</ol>
+</div>
+<div class="section" id="part-2-vector-addition-multiplication-unit-vectors-and-dot-cross-products">
+<h2>Part 2: Vector addition, multiplication, unit vectors and dot &amp; cross products<a class="headerlink" href="#part-2-vector-addition-multiplication-unit-vectors-and-dot-cross-products" title="Permalink to this headline">¶</a></h2>
+<p>An important part of linear algebra is the notion of vector addition and vector multiplication.</p>
+<p>For two vectors <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code> in <span class="math notranslate nohighlight">\(R^{2}\)</span>, we can add or subtract them to form new vectors, lets call it <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p>
+<div class="section" id="adding-two-vectors">
+<h3>Adding two vectors<a class="headerlink" href="#adding-two-vectors" title="Permalink to this headline">¶</a></h3>
+<p>For example,lets say</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{u}=\langle 2,4 \rangle\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}=\langle 4,1 \rangle\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mathbf{u+v} = \mathbf{w} = \langle 2+4, 4+1 \rangle = \langle 6,5 \rangle\)</span></p>
+<p>Graphically it can be represented like this:</p>
+<p><img alt="image.png" src="articles/Linear-Algebra/attachment:image.png" /></p>
+<p><b>Figure 2</b></p>
+<p>The way we would calculate this using numpy is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">u</span><span class="o">+</span><span class="n">v</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6 5]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="scaling-a-vector">
+<h3>Scaling a vector<a class="headerlink" href="#scaling-a-vector" title="Permalink to this headline">¶</a></h3>
+<p>You can scale a vector as well. For example, let’s take <code class="docutils literal notranslate"><span class="pre">u</span></code> from the previous example and scale it by a factor of 3.</p>
+<p>So <code class="docutils literal notranslate"><span class="pre">3u</span></code> would be <span class="math notranslate nohighlight">\(\langle 3*2, 3*4 \rangle = \langle 6,12 \rangle\)</span></p>
+<p>And graphically that would be:</p>
+<p><img alt="image.png" src="articles/Linear-Algebra/attachment:image.png" /></p>
+<p><b> Figure 3 </b></p>
+<p>And in numpy you would solve it like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6 12]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="unit-vectors">
+<h3>Unit Vectors<a class="headerlink" href="#unit-vectors" title="Permalink to this headline">¶</a></h3>
+<p>Like previously defined, a vector has a magnitude and direction. A unit vector is nothig but a vector that has a magnitude of 1. In numpy you can use the <code class="docutils literal notranslate"><span class="pre">linalg.norm</span></code> function to find the magnitude of any numpy array.</p>
+<p>For example, <span class="math notranslate nohighlight">\(\hat{u} = \langle 1,2,3 \rangle\)</span>. The magintude of this vector is <span class="math notranslate nohighlight">\(\sqrt{14}\)</span> and the unit vector would be <span class="math notranslate nohighlight">\(\hat{u}' = \langle 1/\sqrt{14}, 2/\sqrt{14}, 3/\sqrt{14} \rangle\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sqaure root of 14 is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">14</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The magnitude of the vector u is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The unit vector of u is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sqaure root of 14 is: 3.7416573867739413
+The magnitude of the vector u is: 3.7416573867739413
+
+
+The unit vector of u is: [0.26726124 0.53452248 0.80178373]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dot-product-between-two-vectors">
+<h3>Dot Product between two vectors<a class="headerlink" href="#dot-product-between-two-vectors" title="Permalink to this headline">¶</a></h3>
+<p>The dot product between two vectors can be calculated as: <span class="math notranslate nohighlight">\(a.b = \sum a_{i}*b_{i}\)</span></p>
+<p>For example, we have two vectors <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>. Let <code class="docutils literal notranslate"><span class="pre">u</span></code> be equal to <span class="math notranslate nohighlight">\(\langle 3,7,1\rangle\)</span> and <code class="docutils literal notranslate"><span class="pre">v</span></code> be equal to <span class="math notranslate nohighlight">\(\langle 4,2,3 \rangle\)</span>. The dot product between these two vectors is, <span class="math notranslate nohighlight">\((3*4)+(7*2)+(1*3) = 29\)</span></p>
+<p>In numpy, you have <code class="docutils literal notranslate"><span class="pre">numpy.dot</span></code> function that calculates the dot product between two vectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cross-product-between-two-vectors">
+<h3>Cross Product between two vectors<a class="headerlink" href="#cross-product-between-two-vectors" title="Permalink to this headline">¶</a></h3>
+<p>If A and B are two independent vectors, then the result of the cross product of these two vectors (Ax B) is perpendicular to both the vectors and normal to the plane that contains both the vectors. It is represented by: <span class="math notranslate nohighlight">\(A x B = |A||B| sin \theta\)</span> <sup>5</sup></p>
+<p><img alt="image.png" src="articles/Linear-Algebra/attachment:image.png" /></p>
+<p>Lets say you have two vectors: <span class="math notranslate nohighlight">\(u = \langle a_{1}, a_{2}, a_{3} \rangle\)</span> and <span class="math notranslate nohighlight">\(v = \langle b_{1}, b_{2}, b_{3} \rangle\)</span>.</p>
+<p>The cross product between u and v would be:</p>
+<p><span class="math notranslate nohighlight">\(u  x  v = |u||v| sin\theta = \langle (a_{2}*b_{3} - a_{3}*b_{2}), (a_{3}*b_{1} - a_{1}*b_{3}), (a_{1}*b_{2} - a_{2}*b_{1}) \rangle\)</span></p>
+<p>For example, <span class="math notranslate nohighlight">\(u = \langle 1,2,3 \rangle\)</span> and <span class="math notranslate nohighlight">\(v = \langle 4,5,6 \rangle\)</span>, the cross product between the two vectors would be:</p>
+<p><span class="math notranslate nohighlight">\(\langle ((2*6)-(3*5)), ((3*4)-(1*6)), ((1*5)-(2*4)) \rangle = \langle -3, 6, -3 \rangle\)</span></p>
+<p>In numpy, you can use the cross function to find the cross product.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-3  6 -3]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="part-3-matrix-vector-and-matrix-matrix-multiplication">
+<h2>Part 3: Matrix-vector and Matrix-Matrix multiplication<a class="headerlink" href="#part-3-matrix-vector-and-matrix-matrix-multiplication" title="Permalink to this headline">¶</a></h2>
+<p>For multiplication between a matrix and a vector, we need to view the vector as a column matrix, and by that I mean just a matrix with n rows and 1 column. We need to make sure the number of columns in matrix A would match the number of rows in the new column matrix, otherwise the multiplication is not possible. For example, if we have a matrix A which is an mxn matrix, we can only define multiplication with a nx1 column vector. If we let Ax=b, then b is an m×1 column vector. In other words, the number of rows in A (which can be anything) determines the number of rows in the product b. <sup>6</sup></p>
+<p>The same rules apply for matrix-matrix multiplication. The number of rows in the second matrix must match the number of columns in the first matrix.</p>
+<p><span class="math notranslate nohighlight">\(A_{m,n} = 
+ \begin{pmatrix}
+  a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n} \\
+  a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,n} \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  a_{m,1} &amp; a_{m,2} &amp; \cdots &amp; a_{m,n} 
+ \end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(x_{n,1} = \begin{pmatrix} x_{1,1} \\ x_{2,1} \\ \vdots \\ x_{n,1} \end{pmatrix}\)</span></p>
+<p>The product between the matrix and vector would be:</p>
+<p><span class="math notranslate nohighlight">\(b_{m,1} = 
+    \begin{pmatrix} 
+    (a_{1,1}*x_{1,1})+(a_{1,2}*x_{2,1})+\cdots+(a_{1,n}*x_{n,1}) \\
+    (a_{2,1}*x_{1,1})+(a_{2,2}*x_{2,1})+\cdots+(a_{2,n}*x_{n,1}) \\ 
+    \vdots \\ 
+    (a_{m,1}*x_{1,1})+(a_{m,2}*x_{2,1})+\cdots+(a_{m,n}*x_{n,1})
+    \end{pmatrix}\)</span></p>
+<p>In numpy, you can use the <code class="docutils literal notranslate"><span class="pre">matmul</span></code> function to find the multiplication between two matrices, and a vector and matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let A be a 3x3 matrix and x be a 3x1 column vector </span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 41,  92, 143])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets try a matrix and a vector that dont have the right combination of rows and columns. </span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span> 
+    <span class="n">dims_right</span> <span class="o">=</span> <span class="kc">False</span> 
+
+<span class="k">assert</span> <span class="n">dims_right</span><span class="p">,</span> <span class="s2">&quot;The dimensions dont match&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">/var/folders/8c/t0yxdp4914j0qz_qmm5xpyg80000gn/T/ipykernel_9487/728562885.py</span> in <span class="ni">&lt;cell line: 11&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">dims_right</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="k">assert</span> <span class="n">dims_right</span><span class="p">,</span> <span class="s2">&quot;The dimensions dont match&quot;</span>
+
+<span class="ne">AssertionError</span>: The dimensions dont match
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets try multiplication between two matrices </span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span> <span class="c1"># 3x3</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span> <span class="c1"># 3x2 </span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 26,   6],
+       [ 71,  18],
+       [116,  30]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Finally, lets try multiplying two vectors </span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice, how when we used <code class="docutils literal notranslate"><span class="pre">matmul</span></code> between two vectors, it gave us the dot product between the two vectors.</p>
+<p>Another way to think about matrix-matrix multiplication is, lets say you have two matrices A and B, that are both a 3x3 matrix. The way multiplication works is the first row of matrix A and the first column of matrix B are vectors whose dot product equals the first value. You then find the dot product between the first row of matrix A and the second column of matrix B and so on. Hence, the matmul function gives the exact same answer as the dot product between the two vectors.</p>
+</div>
+<div class="section" id="plots-of-the-figures-above">
+<h2>Plots of the figures above<a class="headerlink" href="#plots-of-the-figures-above" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 3</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">axes_class</span><span class="o">=</span><span class="n">axisartist</span><span class="o">.</span><span class="n">Axes</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">new_floating_axis</span><span class="p">(</span><span class="n">nth_coord</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">axis_direction</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Make other axis invisible.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span><span class="mf">4.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">4.5</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">12.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">12.4</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;3u&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Linear-Algebra-Introduction_35_0.png" src="../../_images/Linear-Algebra-Introduction_35_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 2</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">axisartist</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">axes_class</span><span class="o">=</span><span class="n">axisartist</span><span class="o">.</span><span class="n">Axes</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">new_floating_axis</span><span class="p">(</span><span class="n">nth_coord</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">axis_direction</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Make other axis invisible.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span><span class="mf">4.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span><span class="mf">4.4</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">4.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">4.1</span><span class="p">,</span><span class="mf">1.4</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">5.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">5.4</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u+v&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">),</span>
+    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">5.1</span><span class="p">),</span>
+    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">),</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Linear-Algebra-Introduction_36_0.png" src="../../_images/Linear-Algebra-Introduction_36_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating figure 1</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axisartist.axislines</span> <span class="kn">import</span> <span class="n">AxesZero</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">axes_class</span><span class="o">=</span><span class="n">AxesZero</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;xzero&quot;</span><span class="p">,</span> <span class="s2">&quot;yzero&quot;</span><span class="p">]:</span>
+    <span class="c1"># adds arrows at the ends of each axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">set_axisline_style</span><span class="p">(</span><span class="s2">&quot;-|&gt;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># adds X and Y-axis from the origin</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]:</span>
+    <span class="c1"># hides borders</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span><span class="mf">6.1</span><span class="p">),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Linear-Algebra-Introduction_37_0.png" src="../../_images/Linear-Algebra-Introduction_37_0.png" />
+</div>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<p><sup>1</sup> <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_algebra">https://en.wikipedia.org/wiki/Linear_algebra</a></p>
+<p><sup>2</sup> <a class="reference external" href="https://machinelearningmastery.com/examples-of-linear-algebra-in-machine-learning/">https://machinelearningmastery.com/examples-of-linear-algebra-in-machine-learning/</a></p>
+<p><sup>3</sup> <a class="reference external" href="https://web.stanford.edu/class/nbio228-01/handouts/Ch4_Linear_Algebra.pdf">https://web.stanford.edu/class/nbio228-01/handouts/Ch4_Linear_Algebra.pdf</a></p>
+<p><sup>4</sup> <a class="reference external" href="https://numpy.org/doc/stable/user/basics.creation.html">https://numpy.org/doc/stable/user/basics.creation.html</a></p>
+<p><sup>5</sup> <a class="reference external" href="https://www.cuemath.com/geometry/cross-product/">https://www.cuemath.com/geometry/cross-product/</a></p>
+<p><sup>6</sup> <a class="reference external" href="https://mathinsight.org/matrix_vector_multiplication">https://mathinsight.org/matrix_vector_multiplication</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./articles/Linear-Algebra"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">About this book</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Linear-Algebra-Part-II.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Algebra Part 2</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Priyank Shroff<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

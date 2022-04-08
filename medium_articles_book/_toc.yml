@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: articles/intro 
+parts:
+- caption: Linear Algebra 
+  chapters:
+    - file: articles/Linear-Algebra/Linear-Algebra-Introduction
+    - file: articles/Linear-Algebra/Linear-Algebra-Part-II

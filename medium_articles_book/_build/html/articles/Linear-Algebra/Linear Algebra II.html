@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Algebra Part 2 &#8212; Medium Articles</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/MediumLogo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Medium Articles</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear-Algebra-Introduction.html">
+   Linear Algebra with Numpy: Part 1
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/articles/Linear-Algebra/Linear Algebra II.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Farticles/Linear-Algebra/Linear Algebra II.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/articles/Linear-Algebra/Linear Algebra II.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-solving-a-linear-system">
+   Part 1: Solving a linear system
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-determinants-and-traces">
+   Part 2: Determinants and Traces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-inverse-and-transpose-of-matrices">
+   Part 3: Inverse and Transpose of Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-4-eigenvalues-and-eigenvectors">
+   Part 4: Eigenvalues and Eigenvectors
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Algebra Part 2</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-solving-a-linear-system">
+   Part 1: Solving a linear system
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-determinants-and-traces">
+   Part 2: Determinants and Traces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-inverse-and-transpose-of-matrices">
+   Part 3: Inverse and Transpose of Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-4-eigenvalues-and-eigenvectors">
+   Part 4: Eigenvalues and Eigenvectors
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-part-2">
+<h1>Linear Algebra Part 2<a class="headerlink" href="#linear-algebra-part-2" title="Permalink to this headline">¶</a></h1>
+<p>This is the second article in a three-part series about how to use numpy for linear algebra. If you havent read my first article, you can read it here.</p>
+<p>The first article focused on the basics on linear alegra in numpy, specifically representing vectors and matrices, performing simple arithmetic, dot &amp; cross product, unit vectors and vector-vector/vector-matrix/matrix-matrix multiplication. This second article will tackle some intermediate concepts in linear algebra and how to solve them using numpy.</p>
+<p>The first thing we will focus on is solving a linear system, moving on to determinants &amp; traces, inverse and transpose of matrices and finally ending with eigenvalues and eigenvectors.</p>
+<div class="section" id="part-1-solving-a-linear-system">
+<h2>Part 1: Solving a linear system<a class="headerlink" href="#part-1-solving-a-linear-system" title="Permalink to this headline">¶</a></h2>
+<p>In school you were taught how to solve two equations with two unknowns using elimination and substitution. For example, lets say we have two equations:
+<span class="math notranslate nohighlight">\(4x + 2y = 14\)</span></p>
+<p><span class="math notranslate nohighlight">\(3x - 5y = -22\)</span></p>
+<p>We could solve these linear equations by elimination and subsititution to find <span class="math notranslate nohighlight">\(x = 1\)</span> and <span class="math notranslate nohighlight">\(y = 5\)</span></p>
+<p>We can rewrite these equations in the form of a matrix:
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+    4 &amp; 2 \\ 
+    3 &amp; -5
+ \end{pmatrix}\)</span><span class="math notranslate nohighlight">\(\begin{pmatrix} x \\ y \end{pmatrix}\)</span> = <span class="math notranslate nohighlight">\(\begin{pmatrix} 14 \\ -22 \end{pmatrix}\)</span></p>
+<p>In reality we would rarely encouter a 2x2 matrix. More often than not, the matrices would be much bigger and trying to solve them using elimination and subsitution would get very complex very quickly. Converting them to matrices and then solving it makes it much easier.</p>
+<p>We can rewrite any system of linear equations like this: <span class="math notranslate nohighlight">\(AX = B\)</span>, where A is our <span class="math notranslate nohighlight">\(nxn\)</span> matrix of coefficients (<strong>Note the matrix does not have to be a square matrix {rows=columns}, but for this tutorial we will assume square matrices</strong>), X is our <span class="math notranslate nohighlight">\(nx1\)</span> vector of variables and B is our <span class="math notranslate nohighlight">\(nx1\)</span> vector of output.</p>
+<p>So how would you solve the above system equations when written in matrix form?</p>
+<p>First thing I want to introduce is this concept called <i><b>Augmented Matrix</b></i>. Augmented matrix is just a notational concept, where we rewrite the matrix equation (<span class="math notranslate nohighlight">\(AX = B\)</span>) in a way where its easy to solve. In augmented matrix terms, the above equations would be written like this:
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+    4 &amp; 2 &amp; | &amp; 14 \\
+    3 &amp; -5 &amp; | &amp; -22
+\end{pmatrix}\)</span></p>
+<p>Now to solve this system, we can use row operations to find the solution. I am not going to go over row operations, since the focus of this article is on solving systems of equations using numpy; however, if you want to read up about row operations and RROE form (Reduced Row Echelon Forms) you can do so <a class="reference external" href="https://math.libretexts.org/Bookshelves/Algebra/Intermediate_Algebra_(OpenStax)/04%3A_Systems_of_Linear_Equations/4.06%3A_Solve_Systems_of_Equations_Using_Matrices">here</a>.</p>
+<p>In numpy, we have the <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> function that helps us find the solution to a system of linear equations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we first import numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize each equation as a numpy array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">14</span><span class="p">,</span><span class="o">-</span><span class="mi">22</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use np.linalg.solve to find the solution</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 5.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, it gave us the same result as the elimination-substitution method. You can find more information about <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code> on numpy’s website linked <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html">here</a>. But the most important thing I want to call out about using the <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code> function is that it finds the exact solution, and in order to do that it has some requirements. It only accepts a <b>full rank</b> and a <b>square</b> matrix as “a”. Full rank just means that all columns and/or rows are linearly independent. Some more information about rank can be found <a class="reference external" href="https://stattrek.com/matrix-algebra/matrix-rank.aspx">here</a>.</p>
+<p>Like I said earlier, your system of equations doesnt have to be square or a full matrix, however, you wont be able to use the <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code> function to find a solution to that system of equations.</p>
+<p>You can find the rank of a matrix using the <code class="docutils literal notranslate"><span class="pre">np.linalg.matrix_rank</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the question arises, is there a way to figure out whether my square matrix is full rank? The answer to this question provides a great transition to our next topic which is <b>Determinants</b>.</p>
+</div>
+<div class="section" id="part-2-determinants-and-traces">
+<h2>Part 2: Determinants and Traces<a class="headerlink" href="#part-2-determinants-and-traces" title="Permalink to this headline">¶</a></h2>
+<p>In mathematics, the determinant is a scalar value that is a function of the entries of a square matrix.<sup>1</sup></p>
+<p>As the definition states, determinants can only be calculated for a square matrix. I will illustrate 2 examples of how determinants are calculated for a 2x2 and a 3x3 matrix; the method remains the same for higher-order matrices, however, they get computationally harder as the number of rows and columns increases, and you will see why when we caluclate the determinant of a 3x3 matrix.</p>
+<p>Lets say A is a 2x2 matrix
+<span class="math notranslate nohighlight">\(A_{2x2} = \begin{pmatrix} 
+                2 &amp; 6 \\
+                1 &amp; 2
+           \end{pmatrix}\)</span></p>
+<p>The determinant of A, denoted as <span class="math notranslate nohighlight">\(det(A)\)</span>, for a 2x2 matrix is calculated by multiplying the diagonal enteries of the matrix and subtracting them.</p>
+<p>So in our example, <span class="math notranslate nohighlight">\(det(A) = (2*2) - (6*1) = -2\)</span></p>
+<p>Generalizing it to any 2x2 matrix:</p>
+<p><span class="math notranslate nohighlight">\(A_{2x2} = \begin{pmatrix} 
+                a_{1,1} &amp; a_{1,2} \\
+                a_{2,1} &amp; a_{2,2}
+           \end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(det(A) = (a_{1,1} * a_{2,2}) - (a_{1,2} * a_{2,1})\)</span></p>
+<p>Moving on to a 3x3 matrix example:</p>
+<p><span class="math notranslate nohighlight">\(A_{3,3} = \begin{pmatrix} 
+                1 &amp; 6 &amp; 3 \\
+                3 &amp; 2 &amp; 5 \\
+                8 &amp; 9 &amp; 9
+           \end{pmatrix}\)</span></p>
+<p>Now it gets a little more complicated.</p>
+<p>For calcualting determinants of a 3x3 matrix, the first step is to pick any row. We will use the first one: <span class="math notranslate nohighlight">\(&lt;1,6,3&gt;\)</span>.</p>
+<p>Next, we start with the firt value in that row which is 1. Now draw vertical and horizontal line segments through 1 and the matrix that remains is <span class="math notranslate nohighlight">\(\begin{pmatrix} 2 &amp; 5 \\ 9&amp;9 \end{pmatrix}\)</span>. Now we find the determinant of this matrix, which we know how to from the previous section. So the determinant of this matrix is <span class="math notranslate nohighlight">\(18-45 = -27\)</span>. And finally multiply this by 1, which was the first value in the row we selected.</p>
+<p>Now follow the same steps with 6 and then 3. What we get is an equation like this:
+<span class="math notranslate nohighlight">\(det(A) = 1*det(\begin{pmatrix} 2&amp;5 \\ 9&amp;9 \end{pmatrix}) - 6*det(\begin{pmatrix} 3&amp;5 \\ 8&amp;9 \end{pmatrix}) + 3*det(\begin{pmatrix} 3&amp;2 \\ 8&amp;9 \end{pmatrix})\)</span></p>
+<p>Notice, we subtract the second term. The sign keeps alternating.</p>
+<p>So solving that equation we get:
+<span class="math notranslate nohighlight">\(det(A) = 1*(18-45) - 6*(27-40) + 3*(27-16) = -27 + 78 + 33 = 84\)</span></p>
+<p>One thing to note is the determinant formula is agnostic of what row we choose to start with. Try finding the determinant of the above matrix, by starting with the second or third row and compare whether you get the same answer.</p>
+<p>Generalizing this to any 3x3 matrix:</p>
+<p><span class="math notranslate nohighlight">\(A_{3,3} = \begin{pmatrix} 
+                a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+                a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+                a_{3,1} &amp; a_{3,2} &amp; a_{3,3}
+           \end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(det(A) = a_{1,1}*det(\begin{pmatrix} 
+                        a_{2,2} &amp; a_{2,3} \\ 
+                        a_{3,2} &amp; a_{3,3} 
+                      \end{pmatrix})
+    - a_{1,2}*det(\begin{pmatrix} a_{2,1} &amp; a_{2,3} \\ a_{3,1} &amp; a_{3,3} \end{pmatrix}) 
+    + a_{1,3}*det(\begin{pmatrix} a_{2,1} &amp; a_{2,2} \\ a_{3,1} &amp; a_{3,2} \end{pmatrix})\)</span></p>
+<p>The process remains the same for 4x4, 5x5 and higher order matrices, but as you can imagine, it gets more computionally difficult to do by hand when the number of rows and columns is large. Which is why we can rely on NumPy to do the calculations for us. NumPy has the <code class="docutils literal notranslate"><span class="pre">linalg.det</span></code> function that calculates the determinant of a matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculating the determinant for our 2x2 example</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculating the determinant for our 3x3 example </span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83.99999999999999
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see the value we got for our determinant of the 3x3 matrix is 83.9999999 and not 84. Why is that? That is due to the floating point error. I am not going to dig into that in this article, but heres a link if you want to know more about <a class="reference external" href="https://www.geeksforgeeks.org/floating-point-error-in-python/">it</a>.</p>
+<p>Coming back to the question from the last section. How do we know if your square matrix is full rank? The answer to that is, your matrix is full rank if and only if the determinant is not zero.</p>
+<p>The next topic is <code class="docutils literal notranslate"><span class="pre">trace</span></code>. Trace is another operator that only exists for square matrices. It is defined as the sum of the values in the main diagonal and is denoted as <code class="docutils literal notranslate"><span class="pre">tr(A)</span></code>.</p>
+<p>So for a 3x3 matrix:
+<span class="math notranslate nohighlight">\(A_{3,3} = \begin{pmatrix} 
+                a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+                a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+                a_{3,1} &amp; a_{3,2} &amp; a_{3,3}
+           \end{pmatrix}\)</span>
+the trace of this matrix is <span class="math notranslate nohighlight">\(tr(A) = a_{1,1} + a_{2,2} + a_{3,3}\)</span></p>
+<p>Taking the 3x3 matrix example from the previous section.
+<span class="math notranslate nohighlight">\(A_{3,3} = \begin{pmatrix} 
+                1 &amp; 6 &amp; 3 \\
+                3 &amp; 2 &amp; 5 \\
+                8 &amp; 9 &amp; 9
+           \end{pmatrix}\)</span></p>
+<p>the trace of this matrix is <span class="math notranslate nohighlight">\(tr(A) = 1 + 2 + 9 = 12\)</span></p>
+<p>In numpy, you can use the <code class="docutils literal notranslate"><span class="pre">np.trace()</span></code> function to find it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are many properties of traces, but I am only going to highlight couple of them here. One of the properties of trace is that it is a linear mapping. What that means is:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(tr(A+B) = tr(A) + tr(B)\)</span>, where A and B are nxn matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(c*tr(A) = tr(c*A)\)</span>, where c is a scalar constant</p></li>
+</ul>
+<p>Lets illustrate the linear mapping property with some examples. We will take 2 2x2 matrices:</p>
+<p><span class="math notranslate nohighlight">\(A_{2,2} = \begin{pmatrix} 
+                1 &amp; 3 \\
+                4 &amp; 8
+           \end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(B_{2,2} = \begin{pmatrix} 
+                2 &amp; 6 \\
+                1 &amp; 2
+           \end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(c = 4\)</span></p>
+<p>In this case, the <span class="math notranslate nohighlight">\(tr(A) = 9\)</span> and <span class="math notranslate nohighlight">\(tr(B)=4\)</span>, therefore <span class="math notranslate nohighlight">\(tr(A) + tr(B) = 13\)</span>. And <span class="math notranslate nohighlight">\(c*tr(A) = 36\)</span>. Lets check with numpy whether the trace of the sum of matrix A and B and multiplying with a scalar constant gives us the same answer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+
+<span class="n">sum_matrix</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">sum_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mi">4</span> 
+<span class="n">prod_matrix</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">a</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">prod_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36
+</pre></div>
+</div>
+</div>
+</div>
+<p>More comprehensive list of properties of traces can be found <a class="reference external" href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)">here</a>.</p>
+</div>
+<div class="section" id="part-3-inverse-and-transpose-of-matrices">
+<h2>Part 3: Inverse and Transpose of Matrices<a class="headerlink" href="#part-3-inverse-and-transpose-of-matrices" title="Permalink to this headline">¶</a></h2>
+<p>We will first look at Transpose of matrices. A simple concept, where we just replace the rows with the columns.</p>
+<p>Let A be a 3x3 matrix:
+<span class="math notranslate nohighlight">\(A_{3,3} = \begin{pmatrix} 
+                2 &amp; 6 &amp; 0 \\
+                9 &amp; 3 &amp; 8 \\
+                10 &amp; 6 &amp; 3
+           \end{pmatrix}\)</span></p>
+<p>The transpose of this matrix, denoted as <span class="math notranslate nohighlight">\(A^{T}\)</span> is <span class="math notranslate nohighlight">\(\begin{pmatrix} 
+                2 &amp; 9 &amp; 10 \\
+                6 &amp; 3 &amp; 6 \\
+                0 &amp; 8 &amp; 3
+           \end{pmatrix}\)</span></p>
+<p>In NumPy, you can use the <code class="docutils literal notranslate"><span class="pre">np.transpose</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2,  9, 10],
+       [ 6,  3,  6],
+       [ 0,  8,  3]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we will talk about inverse of a matrix. This is an important concept since it shows up in many applications like linear regression and eigen decomposition <i>(both topics will be covered in the next article)</i>. The inverse of a matrix <span class="math notranslate nohighlight">\(A\)</span> is denoted as <span class="math notranslate nohighlight">\(A^{-1}\)</span>.</p>
+<p>An n-by-n square matrix A is called invertible (also nonsingular or nondegenerate), if there exists an n-by-n square matrix B such that</p>
+<p><span class="math notranslate nohighlight">\(\mathbf {AB} =\mathbf {BA} =\mathbf {I} _{n}\)</span>
+where <span class="math notranslate nohighlight">\(I_{n}\)</span> denotes the n-by-n identity matrix and the multiplication used is ordinary matrix multiplication. If this is the case, then the matrix B is uniquely determined by A, and is called the (multiplicative) inverse of A, denoted by <span class="math notranslate nohighlight">\(A^{−1}\)</span></p>
+<p>Similar to an integer, when multiplied by its inverse gives you 1, multiplying a matrix by its inverse gives us the identity matrix. However, unlike integers not all matrices have an inverse. A matrix that does not have an inverse is called a <b>singular matrix</b>. A singular matrix occurs if and only if the determinant of the matrix is zero. <sup>2</sup></p>
+<p>Connecting this back to the discussion we had about rank in the first section, a square matrix is said to be not invertible if and only if the matrix does not have a full rank. And we know that a matrix that has a full rank also has a deteriminant greater than zero.</p>
+<p>Calculating the inverse of a 2x2 matrix is easy, but it gets computionally challenging with higher order matrices. However, NumPy makes it easier for us to calcualte the inverse of a matrix. You can use the <code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code> function to find the inverse of a square matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the inverse of a 3x3 matrix</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.1625    , -0.075     ,  0.2       ],
+       [ 0.22083333,  0.025     , -0.06666667],
+       [ 0.1       ,  0.2       , -0.2       ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Supplying a 2x2 matrix whose determinant is zero </span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Determinant of matrix is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error finding Inverse&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Determinant of matrix is: 0.0
+Error finding Inverse
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiplying the inverse of a matrix with the matrix gives us the identity matrix</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="n">a_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a_inv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.00000000e+00,  0.00000000e+00, -5.55111512e-17],
+       [ 0.00000000e+00,  1.00000000e+00,  0.00000000e+00],
+       [-1.66533454e-16,  0.00000000e+00,  1.00000000e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, barring the floating point error, multiplying <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^{-1}\)</span> gives us the identity matrix.</p>
+</div>
+<div class="section" id="part-4-eigenvalues-and-eigenvectors">
+<h2>Part 4: Eigenvalues and Eigenvectors<a class="headerlink" href="#part-4-eigenvalues-and-eigenvectors" title="Permalink to this headline">¶</a></h2>
+<p>Our final topic for this article is eigenvalues and eigenvectors.</p>
+<p>The word <i>”eigen”</i> comes from the german word, meaning own. In linear algebra, an eigenvector <span class="math notranslate nohighlight">\(v\)</span> of a linear transformation <span class="math notranslate nohighlight">\(T\)</span>, is a non-zero vector that doesnt change direction after the T linear transformation has been applied to it. It only changes magnitude by the factor of its eigenvalue <sup>3</sup>.</p>
+<p>What that means is, when a linear transformation, such as stretching, rotating etc, is applied to the vector, it does not change is original direction, just the magnitude by a factor of its eigenvalue.</p>
+<p>Algebraically, this can be written as:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(Av = \lambda v\)</span></p>
+</div></blockquote>
+<p>Where 𝐴 is <span class="math notranslate nohighlight">\(nxn\)</span> matrix, <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(nx1\)</span> column vector (<span class="math notranslate nohighlight">\(X\neq0\)</span>), and <span class="math notranslate nohighlight">\(\lambda\)</span> is some scalar. Any <span class="math notranslate nohighlight">\(\lambda\)</span> that satisfies the above equation is known as an eigenvalue of the matrix <span class="math notranslate nohighlight">\(A\)</span>, while the associated vector <span class="math notranslate nohighlight">\(x\)</span> is called an eigenvector corresponding to <span class="math notranslate nohighlight">\(\lambda\)</span>. <sup>4</sup></p>
+<p>You can solve the above equation manually to find all the eigenvectors and eigenvalues; to find how to do so you can check out this <a class="reference external" href="https://lpsa.swarthmore.edu/MtrxVibe/EigMat/MatrixEigen.html">link</a>.</p>
+<p>Lets take an example. Let <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> be two vectors in <span class="math notranslate nohighlight">\(R^{2}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(u = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> <span class="math notranslate nohighlight">\(v = \begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span></p>
+<p>If we apply the linear transformation <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 2 &amp; 2 \\ 5 &amp; -1 \end{pmatrix}\)</span> to both the vectors, the following change occurs:</p>
+<p>{gif}</p>
+<p>As you can see the vector <span class="math notranslate nohighlight">\(u\)</span> did not change its original direction after the linear transformation was applied, it was merely scaled. The scaling factor is its eigenvalue. However, the vector <span class="math notranslate nohighlight">\(v\)</span> did change its direction and magintude. So we can say, for the matrix <span class="math notranslate nohighlight">\(A\)</span>, there exists an eigenvector <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<p><i>(Note there might be more than one eigenvectors and in fact in this case, matrix <span class="math notranslate nohighlight">\(A\)</span> does have more than one eigenvectors as we will see when we use python to find them)</i></p>
+<p>In NumPy, we can use the <code class="docutils literal notranslate"><span class="pre">linalg.eig</span></code> function to find the eignevalues and eigenvectors of a matrix. Note that this function also requires a <b>square matrix</b>. More information about the function, requirements and how it solves the equation can be found <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the above example </span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues are: &quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvectors are: &quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigenvalues are:  [ 4. -3.]
+Eigenvectors are:  [[ 0.70710678 -0.37139068]
+ [ 0.70710678  0.92847669]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">linalg.eig</span></code> outputs two values. The first one, <i>w</i> is the list of eigenvalues, which in our case are 4 and -3. The second output is a matrix of the right eigenvectors normalized. And the way they are connected is as follows:</p>
+<blockquote>
+<div><p>the first column of the matrix, is the eigenvector that corresponds to the first eigenvalue. In other words, 4 is the eigenvalue whose corresponding eigenvector is [0.707, 0.707]
+same thing follows the second eigenvector and column.</p>
+</div></blockquote>
+<p>Now in our example we said the vector <span class="math notranslate nohighlight">\(u\)</span> was the eigenvector for the linear trasnformation for the matrix <span class="math notranslate nohighlight">\(A\)</span>. If we normalize the vector <span class="math notranslate nohighlight">\(u\)</span>, we would get the same result as the first column of the matrix above. And we can find the scaling factor and that would be equal to 4.</p>
+<p>Some important properties of eigenvalues and eigenvectors:</p>
+<ul class="simple">
+<li><p>Matrix <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^{T}\)</span> have the same eigenvectors.</p></li>
+<li><p>Matrix <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A^{-1}\)</span> have the same eigenvalues.</p></li>
+<li><p>Sum of the eigenvalues is equal to the trace of the matrix.</p></li>
+<li><p>Product of the eigenvalues is equal to the determinant of the matrix.</p></li>
+</ul>
+<p>More properties and their proofs can be found <a class="reference external" href="https://math.libretexts.org/Bookshelves/Linear_Algebra/Fundamentals_of_Matrix_Algebra_(Hartman)/04%3A_Eigenvalues_and_Eigenvectors/4.02%3A_Properties_of_Eigenvalues_and_Eigenvectors">here</a>.</p>
+<p>Thanks for reading and hopefully you found this article useful. Any feedback is appreciated!</p>
+<p>My next article will focus on matrix decompositions and how linear algebra can be used to solve the linear regression problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 3</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">manimation</span>
+<span class="c1">#from mpl_toolkits.axisartist.axislines import AxesZero</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">axisartist</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">lin_trans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">u_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">lin_trans</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">v_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">lin_trans</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">axes_class</span><span class="o">=</span><span class="n">axisartist</span><span class="o">.</span><span class="n">Axes</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">new_floating_axis</span><span class="p">(</span><span class="n">nth_coord</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">axis_direction</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Make other axis invisible.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># One </span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="c1">#(),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="c1">#(0.0,4.0),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Linear Algebra II_28_0.png" src="../../_images/Linear Algebra II_28_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">axes_class</span><span class="o">=</span><span class="n">axisartist</span><span class="o">.</span><span class="n">Axes</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">new_floating_axis</span><span class="p">(</span><span class="n">nth_coord</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">axis_direction</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;y=0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Make other axis invisible.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Two </span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="c1">#(),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">u_prime</span><span class="p">,</span> <span class="c1">#(),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">4.2</span><span class="p">,</span><span class="mf">4.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;u_prime&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="c1">#(0.0,4.0),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">3.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">v_prime</span><span class="p">,</span> <span class="c1">#(0.0,4.0),</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">8.2</span><span class="p">,</span><span class="mf">2.2</span><span class="p">),</span>
+        <span class="n">text</span><span class="o">=</span><span class="s1">&#39;v_prime&#39;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;2.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Linear Algebra II_29_0.png" src="../../_images/Linear Algebra II_29_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build GIF</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">filename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;1.png&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">filename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;2.png&#39;</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">imageio</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="s1">&#39;mygif.gif&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><sup>1</sup><a class="reference external" href="https://en.wikipedia.org/wiki/Determinant">https://en.wikipedia.org/wiki/Determinant</a></p>
+<p><sup>2</sup><a class="reference external" href="https://en.wikipedia.org/wiki/Invertible_matrix#Examples">https://en.wikipedia.org/wiki/Invertible_matrix#Examples</a></p>
+<p><sup>3</sup> <a class="reference external" href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors</a></p>
+<p><sup>4</sup> <a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.01-Eigenvalues-and-Eigenvectors-Problem-Statement.html">https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.01-Eigenvalues-and-Eigenvectors-Problem-Statement.html</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./articles/Linear-Algebra"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Priyank Shroff<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
